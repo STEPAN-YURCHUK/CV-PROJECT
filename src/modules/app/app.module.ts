@@ -6,6 +6,8 @@ import configuration from '../../config/configuration'
 import { AuthModule } from '../auth/auth.module'
 import { TokenModule } from '../token/token.module'
 import { User } from '../users/models/user.model'
+import { WatchList } from '../watchlist/models/watchlist.model'
+import { WatchlistModule } from '../watchlist/watchlist.module'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 
@@ -27,12 +29,13 @@ import { AppService } from './app.service'
 				database: configService.get('db_name'),
 				autoLoadModels: true,
 				synchronize: true,
-				models: [User],
+				models: [User, WatchList],
 			}),
 		}),
 		UsersModule,
 		AuthModule,
 		TokenModule,
+		WatchlistModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],
