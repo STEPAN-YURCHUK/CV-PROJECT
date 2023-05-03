@@ -5,6 +5,7 @@ import { TokenService } from '../token/token.service'
 import { CreateUserDTO } from '../users/dto'
 import { UsersService } from './../users/users.service'
 import { UserLoginDTO } from './dto'
+import { AuthUserResponse } from './response'
 
 @Injectable()
 export class AuthService {
@@ -19,7 +20,7 @@ export class AuthService {
 		return this.usersService.createUser(dto)
 	}
 
-	async loginUser(dto: UserLoginDTO): Promise<any> {
+	async loginUser(dto: UserLoginDTO): Promise<AuthUserResponse> {
 		const existUser = await this.usersService.findUserByEmail(dto.email)
 		if (!existUser) throw new BadRequestException(AppError.USER_NOT_FOUND)
 		const validatePassword = await bcrypt.compare(
